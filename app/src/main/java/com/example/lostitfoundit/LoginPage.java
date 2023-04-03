@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class LoginPage extends AppCompatActivity {
     TextView backBtn;
+    Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +24,23 @@ public class LoginPage extends AppCompatActivity {
                 goToLandingPage();
             }
         });
+
+        login = (Button) findViewById(R.id.loginBtn);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToViewList();
+            }
+        });
     }
 
     public void goToLandingPage() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToViewList() {
+        Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
     }
 }
