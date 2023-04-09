@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ListActivity extends AppCompatActivity {
-
     private ListView myListView;
     ArrayAdapter<String> myAdapter;
     EditText inputSearch;
