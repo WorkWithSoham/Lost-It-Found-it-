@@ -19,4 +19,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.077" />
 
+<!--    <ir.drax.constraintaccordionlist.AccordionList-->
+<!--        android:id="@+id/accordion"-->
+<!--        android:layout_width="344dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:padding="10dip"-->
+<!--        android:textSize="16dip"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.476"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.077" />-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

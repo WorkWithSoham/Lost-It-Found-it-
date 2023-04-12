@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     def room_version = "2.5.1"
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -40,4 +41,6 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    implementation 'com.github.draxdave:ConstraintAccordion:1.0.7'
 }
