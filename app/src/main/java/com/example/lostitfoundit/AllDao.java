@@ -10,13 +10,13 @@ import java.util.List;
 public interface AllDao {
 
     @Insert
-    void insertPost(Post post);
+    void createPost(Post post);
 
     @Query("select * from post")
     List<Post> getAllPosts();
 
     @Query("select * from post where creator = :creatorId")
-    Post getUserPosts(int creatorId);
+    Post[] getUserPosts(int creatorId);
 
     @Insert
     void insertUser(User user);

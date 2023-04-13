@@ -2,9 +2,11 @@ package com.example.lostitfoundit;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import androidx.room.Relation;
 
 import java.util.Date;
 
@@ -14,31 +16,31 @@ import java.util.Date;
                 parentColumns = "uid",
                 childColumns = "creator",
                 onDelete = ForeignKey.CASCADE)
-        }
-)
+        })
 public class Post {
 
     enum STATUS {
         LOST,
         FOUND,
+        CLAIMED,
         PENDING
     }
 
     @PrimaryKey(autoGenerate = true)
     public int pid;
-
-    @ColumnInfo(name = "creator")
     public int creator;
+    @NonNull
     @ColumnInfo(name = "item_name")
     public String itemName;
     public String itemDescription;
     public String location;
+    @NonNull
     public STATUS status;
     public String reportedDate;
     public String image;
 
 
-    public Post(int creator, String itemName, String itemDescription, String location, STATUS status, String reportedDate, String image) {
+    public Post(int creator, @NonNull String itemName, String itemDescription, String location, @NonNull STATUS status, String reportedDate, String image) {
         this.creator = creator;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
