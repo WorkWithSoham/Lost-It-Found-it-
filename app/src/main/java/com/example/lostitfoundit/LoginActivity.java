@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
     TextView backBtn;
     Button login;
@@ -25,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        login = (Button) findViewById(R.id.signUpBtn);
+        login = (Button) findViewById(R.id.loginBtn);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,9 +53,15 @@ public class LoginActivity extends AppCompatActivity {
 
         User currentUser = allDao.getUserAtLogin(email, password);
 
-        System.out.println("User at Login: " + currentUser);
+        if (Objects.isNull(currentUser) || Objects.equals(currentUser.uid, -1)) {
+            goToLandingPage();
+        } else {
+            System.out.println("User at Login: " + currentUser);
 
-        Intent intent = new Intent(this, ListActivity.class);
-        startActivity(intent);
+            Intent intent = new Intent(this, ListActivity.class);
+            intent.putExtra("currentUser", currentUser);
+            startActivity(intent);
+        }
+
     }
 }

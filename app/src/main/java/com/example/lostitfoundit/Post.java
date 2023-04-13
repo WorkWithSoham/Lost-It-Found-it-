@@ -8,11 +8,14 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(foreignKeys = {@ForeignKey(entity = User.class,
-        parentColumns = "uid",
-        childColumns = "creator",
-        onDelete = ForeignKey.CASCADE)
-})
+@Entity(tableName = "post",
+        foreignKeys = {@ForeignKey(
+                entity = User.class,
+                parentColumns = "uid",
+                childColumns = "creator",
+                onDelete = ForeignKey.CASCADE)
+        }
+)
 public class Post {
 
     enum STATUS {
@@ -30,17 +33,19 @@ public class Post {
     public String itemName;
     public String itemDescription;
     public String location;
-    public String status;
+    public STATUS status;
     public String reportedDate;
+    public String image;
 
 
-    public Post(int creator, String itemName, String itemDescription, String location, String status, String reportedDate) {
+    public Post(int creator, String itemName, String itemDescription, String location, STATUS status, String reportedDate, String image) {
         this.creator = creator;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.location = location;
         this.status = status;
         this.reportedDate = reportedDate;
+        this.image = image;
     }
 
     @NonNull

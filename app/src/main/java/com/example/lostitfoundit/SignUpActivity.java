@@ -1,7 +1,6 @@
 package com.example.lostitfoundit;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +20,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_page);
 
         backBtn = (TextView) findViewById(R.id.backBtn);
-        signUpBtn = (Button) findViewById(R.id.signUpBtn);
+        signUpBtn = (Button) findViewById(R.id.loginBtn);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,10 +62,5 @@ public class SignUpActivity extends AppCompatActivity {
 
         User userToCreate = new User(firstName, lastName, email, password);
         allDao.insertUser(userToCreate);
-
-        List<User> printableUsers = allDao.getAllUsers();
-        for (User u : printableUsers) {
-            System.out.println(u);
-        }
     }
 }

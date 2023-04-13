@@ -16,22 +16,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ListActivity extends AppCompatActivity {
-    private ListView myListView;
     ArrayAdapter<String> myAdapter;
     EditText inputSearch;
     ArrayList<HashMap<String, String>> productList;
 
-    Button createPost;
+    public Button createPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        User currentUser = (User) getIntent().getParcelableExtra("currentUser");
         setContentView(R.layout.activity_list);
 
-        String products[] = {"Airpods 2", "Charger", "Keys", "Id Card", "Apple Pencil",
+        String[] products = {"Airpods 2", "Charger", "Keys", "Id Card", "Apple Pencil",
                 "iPhone 4S", "Wallet",
                 "Guess Watch", "MacBook Air", "Logitech Mouse", "Earring"};
-        myListView = (ListView) findViewById(R.id.editlist_view);
+        ListView myListView = (ListView) findViewById(R.id.editlist_view);
         inputSearch = (EditText) findViewById(R.id.itemSearch);
         myAdapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
         myListView.setAdapter(myAdapter);
