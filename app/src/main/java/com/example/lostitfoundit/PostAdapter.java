@@ -1,5 +1,6 @@
 package com.example.lostitfoundit;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
         mPosts = posts;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -35,8 +37,15 @@ public class PostAdapter extends ArrayAdapter<Post> {
         TextView itemNameTextView = convertView.findViewById(R.id.itemNameTextView);
         itemNameTextView.setText(post.itemName);
 
-        TextView itemDescTextView = convertView.findViewById(R.id.itemDescTextView);
-        itemDescTextView.setText(post.itemDescription);
+        TextView itemStatusTextView = convertView.findViewById(R.id.itemStatusTextView);
+        if (post.status == Post.STATUS.LOST) {
+            itemStatusTextView.setBackgroundResource(R.drawable.rounded_border_red);
+        } else if (post.status == Post.STATUS.FOUND) {
+            itemStatusTextView.setBackgroundResource(R.drawable.rounded_border_green);
+        } else {
+            itemStatusTextView.setBackgroundResource(R.drawable.rounded_border_yellow);
+        }
+        itemStatusTextView.setText(post.status.toString());
 
         TextView reportDateTextView = convertView.findViewById(R.id.reportDateTextView);
         reportDateTextView.setText(post.reportedDate);
