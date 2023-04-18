@@ -129,14 +129,14 @@
         android:layout_width="75dp"
         android:layout_height="50dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/addImage"
+        app:layout_constraintEnd_toStartOf="@+id/cameraBtn"
         app:layout_constraintHorizontal_bias="0.758"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemDescription"
         app:srcCompat="@drawable/baseline_add_location_alt_24" />
 
     <ImageView
-        android:id="@+id/addImage"
+        android:id="@+id/cameraBtn"
         android:layout_width="75dp"
         android:layout_height="50dp"
         android:layout_marginTop="12dp"

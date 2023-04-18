@@ -6,6 +6,10 @@ android {
     namespace 'com.example.lostitfoundit'
     compileSdk 33
 
+    dataBinding{
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.example.lostitfoundit"
         minSdk 33
