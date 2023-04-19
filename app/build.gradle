@@ -48,4 +48,5 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
     implementation 'com.github.draxdave:ConstraintAccordion:1.0.7'
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 }

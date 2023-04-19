@@ -16,8 +16,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Spinner;
 
+//import com.example.library.ImagePicker;
+
+
 import android.Manifest;
 
+
+import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.github.dhaval2404.imagepicker.ImagePickerActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -40,6 +47,7 @@ public class CreatePostActivity extends AppCompatActivity {
 
     //private static final int CAMERA_REQUEST_CODE = 100;
 
+    //FloatingActionButton cameraBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +79,8 @@ public class CreatePostActivity extends AppCompatActivity {
                 String statusString = statusTextView.getSelectedItem().toString();
                 Post.STATUS status;
 
+
+
                 if (statusString.equalsIgnoreCase(String.valueOf(Post.STATUS.FOUND))) {
                     status = Post.STATUS.FOUND;
                 } else {
@@ -86,14 +96,21 @@ public class CreatePostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(CreatePostActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
+                ImagePicker.Companion.with(CreatePostActivity.this)
+                /*if(ActivityCompat.checkSelfPermission(CreatePostActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(CreatePostActivity.this,new String[]{Manifest.permission.CAMERA}, 22);
                 } else {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
-                }
+                }*/
+                .start();
             }
         });
+
+
+
+
+
 
 
     }
@@ -116,17 +133,27 @@ public class CreatePostActivity extends AppCompatActivity {
             System.out.println(p);
         }
 
-        if (requestCode == CAMERA_REQUEST_CODE){
+        /*if (requestCode == CAMERA_REQUEST_CODE){
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             Uri uri = getImageUri(photo);
-        }
+
+            //path of DB
+        }*/
 
         goToViewList();
     }
-    public Uri getImageUri(Bitmap bitmap){
+    /*public Uri getImageUri(Bitmap bitmap){
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, arrayOutputStream);
         String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
         return Uri.parse(path);
+    }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Uri uri = data.getData();
+        //This uri stores the image path as far as I know
     }
 }
