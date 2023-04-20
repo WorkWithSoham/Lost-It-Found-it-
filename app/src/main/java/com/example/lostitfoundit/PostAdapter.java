@@ -2,10 +2,12 @@ package com.example.lostitfoundit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -14,15 +16,16 @@ public class PostAdapter extends ArrayAdapter<Post> {
     private Context mContext;
     private int mResource;
     private List<Post> mPosts;
+    private User mCurrentUser;
 
-    public PostAdapter(Context context, int resource, List<Post> posts) {
+    public PostAdapter(Context context, int resource, List<Post> posts, User currentUser) {
         super(context, resource, posts);
         mContext = context;
         mResource = resource;
         mPosts = posts;
+        mCurrentUser = currentUser;
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -50,6 +53,21 @@ public class PostAdapter extends ArrayAdapter<Post> {
         TextView reportDateTextView = convertView.findViewById(R.id.reportDateTextView);
         reportDateTextView.setText(post.reportedDate);
 
+        Button postDetailsBtn = convertView.findViewById(R.id.itemDetailsBtn);
+        postDetailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postDetailsActivity(post);
+            }
+        });
+
         return convertView;
     }
+
+     public void postDetailsActivity(Post post) {
+        Intent intent = new Intent(mContext, PostDetailsActivity.class);
+        intent.putExtra("currentUser", mCurrentUser);
+        intent.putExtra("post", post);
+        mContext.startActivity(intent);
+     }
 }

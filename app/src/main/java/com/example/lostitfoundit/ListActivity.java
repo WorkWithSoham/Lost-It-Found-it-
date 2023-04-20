@@ -32,9 +32,13 @@ public class ListActivity extends AppCompatActivity {
         currentUser = (User) getIntent().getParcelableExtra("currentUser");
         setContentView(R.layout.activity_list);
 
+        HashMap<String, Object> adapterHashmap = new HashMap<>();
         List<Post> allPosts = getAllPosts();
 
-        PostAdapter postAdapter = new PostAdapter(this, R.layout.list_item, allPosts);
+        adapterHashmap.put("allPosts", allPosts);
+        adapterHashmap.put("currentUser", currentUser);
+
+        PostAdapter postAdapter = new PostAdapter(this, R.layout.list_item, allPosts, currentUser);
         ListView myListView = (ListView) findViewById(R.id.editlist_view);
         myListView.setAdapter(postAdapter);
 
