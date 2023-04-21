@@ -26,4 +26,7 @@ public interface AllDao {
 
     @Query("select * from user where email = :email and password = :password")
     User getUserAtLogin(String email, String password);
+
+    @Query("select * from user where uid = :id")
+    User getUserById(int id);
 }
