@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -39,6 +40,18 @@ public class PostDetailsActivity extends AppCompatActivity {
                 listViewActivity();
             }
         });
+
+        Button claimBtn = (Button) findViewById(R.id.pd_claimButton);
+        if (post.status == Post.STATUS.CLAIMED || post.status == Post.STATUS.PENDING) {
+            claimBtn.setVisibility(View.GONE);
+        }
+        claimBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                claimItem(post.pid, currentUser.uid);
+                claimBtn.setVisibility(View.GONE);
+            }
+        });
     }
 
     public User getPostUser(int uid) {
@@ -51,6 +64,13 @@ public class PostDetailsActivity extends AppCompatActivity {
     public void listViewActivity() {
         Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
+    }
+
+    public void claimItem(int pid, int uid){
+        MyDatabase myDatabase = MyDatabase.getMyDatabase(this);
+        AllDao allDao = myDatabase.getAllDao();
+
+        allDao.claimItem(pid, uid);
     }
 
 }

@@ -18,6 +18,9 @@ public interface AllDao {
     @Query("select * from post where creator = :creatorId")
     Post[] getUserPosts(int creatorId);
 
+    @Query("update post set status = 'CLAIMED', creator = :uid where pid = :pid")
+    void claimItem(int pid, int uid);
+
     @Insert
     void insertUser(User user);
 
