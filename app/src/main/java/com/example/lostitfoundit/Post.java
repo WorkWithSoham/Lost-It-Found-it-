@@ -42,8 +42,9 @@ public class Post implements Parcelable {
     public String reportedDate;
     public String image;
 
+    private String imagePath;
 
-    public Post(int creator, @NonNull String itemName, String itemDescription, String location, @NonNull STATUS status, String reportedDate, String image) {
+    public Post(int creator, @NonNull String itemName, String itemDescription, String location, @NonNull STATUS status, String reportedDate, String image, String imagePath) {
         this.creator = creator;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
@@ -51,7 +52,18 @@ public class Post implements Parcelable {
         this.status = status;
         this.reportedDate = reportedDate;
         this.image = image;
+        this.imagePath = imagePath;
     }
+
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
 
     public static final Creator<Post> CREATOR = new Creator<Post>() {
         @Override

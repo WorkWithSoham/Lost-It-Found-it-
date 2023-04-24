@@ -45,9 +45,9 @@ public class CreatePostActivity extends AppCompatActivity {
 
     @Nullable Intent data;
 
-    //private static final int CAMERA_REQUEST_CODE = 100;
+    private String imagePath;
 
-    //FloatingActionButton cameraBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,7 @@ public class CreatePostActivity extends AppCompatActivity {
                 ImageView locationTextView = (ImageView) findViewById(R.id.addLocation);
                 ImageView imageTextView = (ImageView) findViewById(R.id.cameraBtn);
 
+
                 String itemName = itemNameTextView.getText().toString();
                 String itemDesc = itemDescTextView.getText().toString();
                 String reportedDate = reportedDateTextView.getText().toString();
@@ -87,7 +88,7 @@ public class CreatePostActivity extends AppCompatActivity {
                     status = Post.STATUS.LOST;
                 }
 
-                createPost(itemName, itemDesc, reportedDate, status, data);
+                createPost(itemName, itemDesc, reportedDate, status, data, imagePath);
             }
         });
 
@@ -120,12 +121,22 @@ public class CreatePostActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void createPost(String itemName, String itemDesc, String reportedDate, Post.STATUS status, @Nullable Intent data) {
+    public void createPost(String itemName, String itemDesc, String reportedDate, Post.STATUS status, @Nullable Intent data, String imagePath) {
         MyDatabase myDatabase = MyDatabase.getMyDatabase(this);
         AllDao allDao = myDatabase.getAllDao();
 
-        Post createdPost = new Post(currentUser.uid, itemName, itemDesc, "", status, reportedDate, "");
+
+
+        Post createdPost = new Post(currentUser.uid, itemName, itemDesc, "", status, reportedDate, "" , imagePath);
         allDao.createPost(createdPost);
+
+
+        Uri imageUri = data.getData();
+        if (imageUri != null) {
+            //String imagePath = imageUri.toString();
+            createdPost.setImagePath(imagePath);
+        }
+
 
         List<Post> allPosts = allDao.getAllPosts();
 
@@ -133,27 +144,17 @@ public class CreatePostActivity extends AppCompatActivity {
             System.out.println(p);
         }
 
-        /*if (requestCode == CAMERA_REQUEST_CODE){
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            Uri uri = getImageUri(photo);
 
-            //path of DB
-        }*/
 
         goToViewList();
     }
-    /*public Uri getImageUri(Bitmap bitmap){
-        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, arrayOutputStream);
-        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
-        return Uri.parse(path);
-    }*/
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         Uri uri = data.getData();
-        //This uri stores the image path as far as I know
+
     }
 }
