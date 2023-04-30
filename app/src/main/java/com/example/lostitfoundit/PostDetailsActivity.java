@@ -30,7 +30,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         User postUser = getPostUser(post.creator);
         TextView itemReport = (TextView) findViewById(R.id.pd_reportedBy);
-        String itemReportString = "Item reported as " + post.status + " by " + postUser.firstName + " " + postUser.lastName;
+        String itemReportString = "Item " + post.status + " by " + postUser.firstName + " " + postUser.lastName;
         itemReport.setText(itemReportString);
 
         TextView backBtn = (TextView) findViewById(R.id.pd_backBtn);
