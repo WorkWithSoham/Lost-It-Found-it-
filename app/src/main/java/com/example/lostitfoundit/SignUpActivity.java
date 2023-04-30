@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         User userToCreate = new User(firstName, lastName, email, password);
         allDao.insertUser(userToCreate);
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+
+        goToLandingPage();
     }
 }
